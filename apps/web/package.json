@@ -15,6 +15,7 @@
     "clean:all": "bun clean:build && bun clean:node_modules && bun clean:turbo"
   },
   "dependencies": {
+    "@ai-sdk/google": "^0.0.55",
     "@ai-sdk/openai": "^0.0.54",
     "@hookform/resolvers": "^3.9.0",
     "@mdx-js/loader": "^3.0.1",

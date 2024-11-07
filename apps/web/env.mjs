@@ -11,6 +11,7 @@ export const env = createEnv({
     UPLOADTHING_APP_ID: z.string().min(1),
     SUPABASE_SERVICE_ROLE: z.string().min(1),
     OPENAI_API_KEY: z.string().min(1),
+    GOOGLE_AI_STUDIO_API_KEY: z.string().min(1),
     UPSTASH_REDIS_REST_URL: z.string().min(1),
     UPSTASH_REDIS_REST_TOKEN: z.string().min(1),
     RESEND_API_KEY: z.string().min(1),
@@ -37,6 +38,7 @@ export const env = createEnv({
     UPLOADTHING_APP_ID: process.env.UPLOADTHING_APP_ID,
     SUPABASE_SERVICE_ROLE: process.env.SUPABASE_SERVICE_ROLE,
     OPENAI_API_KEY: process.env.OPENAI_API_KEY,
+    GOOGLE_AI_STUDIO_API_KEY: process.env.GOOGLE_AI_STUDIO_API_KEY,
     UPSTASH_REDIS_REST_URL: process.env.UPSTASH_REDIS_REST_URL,
     UPSTASH_REDIS_REST_TOKEN: process.env.UPSTASH_REDIS_REST_TOKEN,
 

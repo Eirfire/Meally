@@ -1,5 +1,5 @@
 "use server";
-import { openAI } from "@/lib/server/ai/open_ai";
+import { google } from "@/lib/server/ai/google_ai";
 import { ratelimit } from "@/lib/server/kv";
 import logger from "@/lib/services/logger";
 import { recipeId } from "@/lib/utils";
@@ -49,7 +49,7 @@ export const createRecipeFromText = async (
   }
 
   const { object } = await generateObject({
-    model: openAI("gpt-4o-mini-2024-07-18"),
+    model: google("gemini-1.5-flash-latest", { structuredOutputs: true }),
     schemaName: "Recipe",
     schemaDescription:
       "Extract the recipe in the image if not a recipe then return null",
