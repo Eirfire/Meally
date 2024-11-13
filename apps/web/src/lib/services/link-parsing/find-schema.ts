@@ -90,21 +90,24 @@ const fetchWithRetry = async (
   }
 };
 
+export const getHtml = async (link: string): Promise<string> => {
+  const res = await fetchWithRetry(link);
+  if (!res.ok) {
+    throw new Error(`Failed to fetch: ${res.status} ${res}`);
+  }
+  return await res.text();
+};
+
 /**
  * Gets the recipe json-ld from a given link
- * @param link the url of the recipe
+ * @param html the html content of the recipe
  * @returns {SchemaRecipe | null} the recipe object or null if the recipe could not be parsed
  */
 export const getRecipeJsonLd = async (
-  link: string
+  html: string
 ): Promise<SchemaRecipe | null> => {
   try {
     let recipe: SchemaRecipe | null = null;
-    const res = await fetchWithRetry(link);
-    if (!res.ok) {
-      throw new Error(`Failed to fetch: ${res.status} ${res}`);
-    }
-    const html = await res.text();
 
     // const recipe = extractRecipeSchema(html);
     recipe = extractUsingRegex(html);
@@ -115,6 +118,7 @@ export const getRecipeJsonLd = async (
       const scripts = doc.querySelectorAll(
         'script[type="application/ld+json"]'
       );
+      let found: SchemaRecipe | null = null;
 
       scripts.forEach((script) => {
         if (script.textContent) {
@@ -122,7 +126,7 @@ export const getRecipeJsonLd = async (
             const jsonLdObject = JSON.parse(script.textContent);
             const foundRecipe = findRecipeSchema(jsonLdObject);
             if (foundRecipe) {
-              recipe = foundRecipe;
+              found = foundRecipe;
             }
           } catch (error) {
             logger.error(`Error parsing JSON-LD: ${error}`);

@@ -1,7 +1,6 @@
 import { recipeId } from "@/lib/utils";
 import { Ingredient, NewRecipe } from "@/types";
 
-export * from "./find-schema";
 
 /**
  * Converts a time format string to minutes
